@@ -9,27 +9,11 @@ class ContactForm extends Component {
  static propTypes = {
   submitNewContact: PropTypes.func.isRequired,
   contacts: PropTypes.array.isRequired,
-};
+ };
 
  state = {
   name: "",
   number: "",
- };
-
- findDuplicate = (newContactName) => {
-  if (!newContactName) {
-   alert("The field cannot be empty!");
-   return false;
-  }
-  const isDublicate = this.props.contacts.some(
-   (contact) => contact.name === newContactName
-  );
-
-  if (isDublicate) {
-   alert("This Name already exist!" + newContactName);
-   return false;
-  }
-  return true;
  };
 
  saveInputValueToState = (evt) => {
@@ -47,8 +31,26 @@ class ContactForm extends Component {
   }
  };
 
+ 
  resetForm = () => {
   this.setState({ name: "", number: "" });
+ };
+
+
+ findDuplicate = (newContactName) => {
+  if (!newContactName) {
+   alert("The field cannot be empty!");
+   return false;
+  }
+  const isDublicate = this.props.contacts.some(
+   (contact) => contact.name === newContactName
+  );
+
+  if (isDublicate) {
+   alert("This Name already exist!" + newContactName);
+   return false;
+  }
+  return true;
  };
 
  render() {

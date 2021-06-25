@@ -25,12 +25,12 @@ const Filter = ({ filter, filterContacts }) => {
 };
 
 Filter.propTypes = {
- filter: PropTypes.string.isRequired,
- filterContacts: PropTypes.func.isRequired,
+ filter: PropTypes.string,
+ filterContacts: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => ({
- filter: state.filter.filter_items,
+ filter: state.contacts.filter,
 });
 
 const mapDispatchToProps = {

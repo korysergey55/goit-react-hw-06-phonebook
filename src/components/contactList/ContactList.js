@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes, { object } from "prop-types";
+import PropTypes from "prop-types";
 import styles from "./ContactList.module.css";
 import { connect } from "react-redux";
 import { handleDelete } from "../../redux/contactForm/contactFormActions";
@@ -40,7 +40,7 @@ ContactList.propTypes = {
 };
 
 const getNormolizeContacts = (state) => {
- const formattedContacts = state.filter.items.toLowerCase().trim();
+ const formattedContacts = state.contacts.filter.toLowerCase().trim();
  const filteredContacts = state.contacts.items.filter((contact) =>
   contact.name.toLowerCase().includes(formattedContacts)
  );

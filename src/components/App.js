@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Section from "./sectipon/Section";
 import ContactList from "./contactList/ContactList";
 import ContactForm from "./contactForm/ContactForm";
 import Filter from "./filter/Filter";
 
-class App extends Component {
+const App = () => {
  //  componentDidMount() {
  //   const items = localStorage.getItem("contacts");
  //   if (items) {
@@ -19,20 +19,18 @@ class App extends Component {
  //   }
  //  }
 
- render() {
-  return (
-   <>
-    <Section title={"Phonebook"}>
-     <ContactForm />
-    </Section>
+ return (
+  <>
+   <Section title={"Phonebook"}>
+    <ContactForm />
+   </Section>
 
-    <Section title={"Contacts"}>
-     <Filter />
+   <Section title={"Contacts"}>
+    <Filter />
 
-     <ContactList />
-    </Section>
-   </>
-  );
- }
-}
+    <ContactList />
+   </Section>
+  </>
+ );
+};
 export default App;
