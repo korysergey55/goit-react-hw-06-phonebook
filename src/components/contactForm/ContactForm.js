@@ -1,16 +1,35 @@
 import React, { Component } from "react";
 import styles from "./ContactForm.module.css";
+import { v4 as uuid } from "uuid";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { submitNewContact } from "../../redux/contactForm/contactFormActions";
 
 class ContactForm extends Component {
  static propTypes = {
   submitNewContact: PropTypes.func.isRequired,
-  findDuplicate: PropTypes.func.isRequired,
- };
+  contacts: PropTypes.array.isRequired,
+};
 
  state = {
   name: "",
   number: "",
+ };
+
+ findDuplicate = (newContactName) => {
+  if (!newContactName) {
+   alert("The field cannot be empty!");
+   return false;
+  }
+  const isDublicate = this.props.contacts.some(
+   (contact) => contact.name === newContactName
+  );
+
+  if (isDublicate) {
+   alert("This Name already exist!" + newContactName);
+   return false;
+  }
+  return true;
  };
 
  saveInputValueToState = (evt) => {
@@ -22,14 +41,14 @@ class ContactForm extends Component {
  handleSubmitForm = (evt) => {
   evt.preventDefault();
 
-  if (this.props.findDuplicate(this.state.name)) {
-   this.props.submitNewContact(this.state);
+  if (this.findDuplicate(this.state.name)) {
+   this.props.submitNewContact({ ...this.state, id: uuid() });
    this.resetForm();
   }
  };
 
  resetForm = () => {
-  this.setState({ name: "", number: "", id: "" });
+  this.setState({ name: "", number: "" });
  };
 
  render() {
@@ -70,4 +89,13 @@ class ContactForm extends Component {
   );
  }
 }
-export default ContactForm;
+
+const mapStateToProps = (state, ownProps) => ({
+ contacts: state.contacts.items,
+});
+
+const mapDispatchToProps = {
+ submitNewContact,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

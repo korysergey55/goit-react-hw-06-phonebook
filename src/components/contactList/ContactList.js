@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes, { object } from "prop-types";
 import styles from "./ContactList.module.css";
+import { connect } from "react-redux";
+import { handleDelete } from "../../redux/contactForm/contactFormActions";
 
-const ContactList = ({ filteredContacts, handleDelete }) => {
+
+const ContactList = ({ contacts, handleDelete }) => {
  return (
   <div className={styles.mainContainer}>
-    <ul>
-    {filteredContacts.map((contact) => (
+   <ul>
+    {contacts.map((contact) => (
      <li className={styles.newContact} key={contact.id}>
       <p className={styles.newContactName}>
        {contact.name} : {contact.number}
@@ -36,4 +39,20 @@ ContactList.propTypes = {
  handleDelete: PropTypes.func.isRequired,
 };
 
-export default ContactList;
+const getNormolizeContacts = (state) => {
+ const formattedContacts = state.filter.items.toLowerCase().trim();
+ const filteredContacts = state.contacts.items.filter((contact) =>
+  contact.name.toLowerCase().includes(formattedContacts)
+ );
+ return filteredContacts;
+};
+
+const mapStateToProps = (state, ownProps) => ({
+ contacts: getNormolizeContacts(state),
+});
+
+const mapDispatchToProps = {
+ handleDelete,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
