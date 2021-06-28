@@ -31,11 +31,9 @@ class ContactForm extends Component {
   }
  };
 
- 
  resetForm = () => {
   this.setState({ name: "", number: "" });
  };
-
 
  findDuplicate = (newContactName) => {
   if (!newContactName) {

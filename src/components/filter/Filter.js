@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Filter.module.css";
 import { connect } from "react-redux";
-import { filterContacts } from "../../redux/filter/filterActions";
+import { filterContacts } from "../../redux/contactForm/contactFormActions";
 
 const Filter = ({ filter, filterContacts }) => {
  return (
