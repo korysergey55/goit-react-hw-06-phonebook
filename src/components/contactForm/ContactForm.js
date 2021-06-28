@@ -36,13 +36,15 @@ class ContactForm extends Component {
  };
 
  findDuplicate = (newContactName) => {
+
+  const isDublicate = this.props.contacts.some(
+   (contact) => contact.name === newContactName
+  );
+  
   if (!newContactName) {
    alert("The field cannot be empty!");
    return false;
   }
-  const isDublicate = this.props.contacts.some(
-   (contact) => contact.name === newContactName
-  );
 
   if (isDublicate) {
    alert("This Name already exist!" + newContactName);
